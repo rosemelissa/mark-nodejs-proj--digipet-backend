@@ -4,6 +4,7 @@ import {
   trainDigipet,
   walkDigipet,
   ignoreDigipet,
+  rehomeDigipet,
 } from "./controller";
 import { getDigipet, INITIAL_DIGIPET, setDigipet } from "./model";
 
@@ -192,3 +193,24 @@ describe("ignoreDigipet", () => {
   });
 
 })
+
+describe("rehomeDigipet", () => {
+  test("when there is a current digipet, it rehomes the digipet", () => {
+    // setup
+    setDigipet(INITIAL_DIGIPET);
+
+    // act
+    rehomeDigipet();
+
+    // assert
+    expect(getDigipet()).toStrictEqual(null);
+  });
+
+  test("when there is not a current digipet, it throws an error", () => {
+    // setup
+    setDigipet();
+
+    // assert error gets thrown
+    expect(() => rehomeDigipet()).toThrowError();
+  });
+});
